@@ -1,0 +1,70 @@
+<div class="search">
+  <form #form ="ngForm" (submit)="onSubmit()">
+    <input type="text" placeholder="Search city" name="city" [(ngModel)]="cityName">
+  </form>
+</div>
+<div *ngIf="geoData">
+<div class="container" *ngIf="weatherData">
+  <div class="upperData">
+    <img src="../assets/hot.jpg" *ngIf="weatherData.current_weather.temperature > 15">
+    <img src="../assets/cold.jpg" *ngIf="weatherData.current_weather.temperature <= 15">
+
+    <div class="weatherData">
+      <div class="location">{{ geoData.name }}</div>
+      <div class="temperature">{{ weatherData.current_weather.temperature | number: '1.0-0'}}°C</div>
+    </div>
+  </div>
+
+  <div class="lowerData">
+    <div class="moreInfoLabel">
+      More Information
+    </div>
+    
+    <div class="moreInfoContainer">
+
+      <div class="infoBlock">
+        <div class="infoBlockLabel">
+          <img src="../assets/min.png">
+        <span>min</span>
+      </div>
+        <div class="infoBlockValue">
+        {{weatherData.daily.temperature_2m_min}}°C
+        </div>
+      </div>
+
+      <div class="infoBlock">
+        <div class="infoBlockLabel">
+          <img src="../assets/max.png">
+        <span>max</span>
+      </div>
+        <div class="infoBlockValue">
+          {{ weatherData.daily.temperature_2m_max }}°C
+        </div>
+      </div>
+
+      <div class="infoBlock">
+        <div class="infoBlockLabel">
+          <img src="../assets/wind-flag.png">
+        <span>wind direction</span>
+         </div>
+        <div class="infoBlockValue">
+          {{ weatherData.current_weather.winddirection }}°
+        </div>
+      </div>
+
+      <div class="infoBlock">
+        <div class="infoBlockLabel">
+          <img src="../assets/wind.png">
+        <span>wind</span>
+      </div>
+        <div class="infoBlockValue">
+          {{ weatherData.current_weather.windspeed }} km/h
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<router-outlet></router-outlet>
